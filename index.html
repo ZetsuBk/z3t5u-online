@@ -1,97 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Z3T5U PC Hardware Shop</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Z3T5U • PC Hardware Shop</title>
+  <meta name="description" content="Z3T5U Online — premium PC components: GPUs, CPUs, SSDs, RAM, motherboards and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #f9f9f9; color: #333; }
-    header { background: linear-gradient(135deg, #f57c00, #ff9800); color: white; padding: 50px 20px; text-align: center; }
-    header h1 { font-size: 2.5rem; margin: 0; }
-    header p { font-size: 1.2rem; margin: 10px 0 0; }
-    nav { background: #222; padding: 10px 20px; text-align: center; }
-    nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-    nav a:hover { color: #ff9800; }
-    section { padding: 40px 20px; max-width: 1100px; margin: auto; }
-    h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; color: #f57c00; }
-    .grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-    .product { background: white; border: 1px solid #ddd; border-radius: 8px; width: 260px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.2s; }
-    .product:hover { transform: translateY(-5px); }
-    .product img { width: 100%; height: 160px; object-fit: cover; border-radius: 5px; }
-    .product h3 { margin: 15px 0 10px; font-size: 1.2rem; }
-    .product p { margin: 5px 0; font-size: 1rem; }
-    .product button { background: #f57c00; color: white; border: none; padding: 10px 20px; margin-top: 10px; cursor: pointer; border-radius: 5px; font-size: 1rem; }
-    .product button:hover { background: #e65100; }
-    footer { background: #222; color: white; padding: 20px; text-align: center; margin-top: 40px; }
-    footer a { color: #ff9800; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    :root{
+      --bg:#0b0e14;         /* rich dark */
+      --surface:#121725;    /* card bg */
+      --muted:#8892a6;      /* secondary text */
+      --line:#1f2537;       /* borders */
+      --primary:#ff7a18;    /* orange accent */
+      --primary-2:#ffb152;  /* lighter accent */
+      --text:#e6e9f2;       /* main text */
+      --green:#22c55e;      /* badges */
+      --red:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{color:var(--primary);text-decoration:none}
+    img{display:block;max-width:100%;border-radius:12px}
+    .container{max-width:1180px;margin:0 auto;padding:0 20px}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(11,14,20,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.5px}
+    .brand .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-2))}
+    .menu{display:flex;gap:18px}
+    .menu a{color:var(--text);opacity:.9;font-weight:600}
+    .menu a:hover{opacity:1;color:var(--primary)}
+    .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#111;padding:10px 16px;border-radius:12px;font-weight:700;border:none;cursor:pointer}
+    .btn.secondary{background:transparent;color:var(--text);border:1px solid var(--line)}
+
+    /* HERO */
+    .hero{position:relative;overflow:hidden}
+    .hero-gradient{position:absolute;inset:-120px -40px auto -40px;height:520px;background:radial-gradient(800px 320px at 50% -60px,rgba(255,122,24,.45),transparent 60%),radial-gradient(600px 240px at 90% -40px,rgba(255,177,82,.35),transparent 60%)}
+    .hero .container{position:relative;padding:68px 20px 32px}
+    .headline{font-size:clamp(32px,5vw,56px);line-height:1.05;margin:18px 0 12px;font-weight:800}
+    .sub{color:var(--muted);font-size:clamp(16px,2.2vw,18px);max-width:780px}
+    .hero-cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+    .stats{display:flex;gap:18px;margin-top:26px;flex-wrap:wrap}
+    .badge{background:#0f1424;border:1px solid var(--line);padding:10px 14px;border-radius:999px;color:var(--muted);font-weight:600}
+
+    /* GRID */
+    .section{padding:56px 0}
+    .section h2{font-size:clamp(24px,3.5vw,34px);margin:0 0 22px;font-weight:800}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+    .card{grid-column:span 12;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px;transition:transform .2s, box-shadow .2s}
+    .card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+    .price-row{display:flex;align-items:center;justify-content:space-between}
+    .price{font-size:20px;font-weight:800}
+    .chip{font-weight:700;color:#0d1b0f;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);padding:6px 10px;border-radius:999px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+
+    @media(min-width:700px){
+      .card{grid-column:span 6}
+    }
+    @media(min-width:980px){
+      .card{grid-column:span 3}
+    }
+
+    /* FEATURES */
+    .features{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+    .feature{grid-column:span 12;background:linear-gradient(180deg,rgba(255,122,24,.08),rgba(255,122,24,.02));border:1px solid var(--line);border-radius:16px;padding:18px}
+    .feature h3{margin:8px 0 6px}
+    @media(min-width:900px){.feature{grid-column:span 4}}
+
+    /* CTA */
+    .cta{background:linear-gradient(135deg,rgba(255,122,24,.15),rgba(255,177,82,.08));border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center}
+
+    /* FOOTER */
+    footer{border-top:1px solid var(--line);margin-top:48px}
+    .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;color:var(--muted);flex-wrap:wrap}
+    .foot a{color:var(--muted)}
   </style>
 </head>
 <body>
-  <!-- Hero Section -->
-  <header>
-    <h1>Welcome to Z3T5U PC Hardware Shop</h1>
-    <p>Your trusted source for high-performance components</p>
-  </header>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><span class="dot"></span> Z3T5U <span style="opacity:.6;font-weight:700">Hardware</span></div>
+      <div class="menu">
+        <a href="#products">Products</a>
+        <a href="#why">Why Us</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn" href="#contact">Get a Quote</a>
+    </div>
+  </div>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#products">Products</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <!-- Products Section -->
-  <section id="products">
-    <h2>Our Bestsellers</h2>
-    <div class="grid">
-      <div class="product">
-        <img src="https://via.placeholder.com/260x160?text=Gaming+GPU" alt="GPU">
-        <h3>NVIDIA RTX 4080</h3>
-        <p>Ultra-fast graphics card for 4K gaming</p>
-        <p><strong>$1,199</strong></p>
-        <button>Buy Now</button>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-gradient"></div>
+    <div class="container">
+      <div class="badge">🚚 Free shipping on orders over $150</div>
+      <h1 class="headline">Premium PC Components for Gamers & Creators</h1>
+      <p class="sub">GPUs, CPUs, SSDs, RAM, motherboards — curated for performance and reliability. Backed by local support and 2‑year warranty options.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#products">Shop Bestsellers</a>
+        <a class="btn secondary" href="#why">Why Choose Z3T5U</a>
       </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/260x160?text=CPU" alt="CPU">
-        <h3>Intel i9 14900K</h3>
-        <p>Next-gen CPU for creators and gamers</p>
-        <p><strong>$599</strong></p>
-        <button>Buy Now</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/260x160?text=SSD" alt="SSD">
-        <h3>Samsung 990 Pro 2TB</h3>
-        <p>Blazing fast NVMe SSD storage</p>
-        <p><strong>$249</strong></p>
-        <button>Buy Now</button>
-      </div>
-      <div class="product">
-        <img src="https://via.placeholder.com/260x160?text=RAM" alt="RAM">
-        <h3>Corsair Vengeance 32GB</h3>
-        <p>DDR5 memory for smooth multitasking</p>
-        <p><strong>$179</strong></p>
-        <button>Buy Now</button>
+      <div class="stats">
+        <div class="badge">⭐ 4.9/5 Rated by 1,200+ customers</div>
+        <div class="badge">✅ Genuine parts, sealed boxes</div>
+        <div class="badge">🛡️ Secure payments</div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Us</h2>
-    <p>At Z3T5U Online, we specialize in premium PC components that deliver performance, reliability, and value. Whether you're a gamer, content creator, or building your first PC, our shop has the parts you need.</p>
+  <!-- PRODUCTS -->
+  <section id="products" class="section">
+    <div class="container">
+      <h2>Best Sellers</h2>
+      <p class="muted" style="margin-bottom:18px">Hand‑picked components with the best price/performance this month.</p>
+      <div class="grid">
+        <!-- Use picsum.photos seeded images so they always work -->
+        <div class="card">
+          <img src="https://picsum.photos/seed/gpu/600/400" alt="High-end GPU">
+          <div class="price-row"><div class="price">$1,199</div><span class="chip">In stock</span></div>
+          <h3>NVIDIA RTX 4080</h3>
+          <p class="muted">16GB GDDR6X • 4K gaming • DLSS 3</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20RTX%204080">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/cpu/600/400" alt="High-end CPU">
+          <div class="price-row"><div class="price">$599</div><span class="chip">Hot</span></div>
+          <h3>Intel Core i9‑14900K</h3>
+          <p class="muted">24 cores • 6.0GHz boost • LGA1700</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20i9-14900K">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/ssd/600/400" alt="NVMe SSD">
+          <div class="price-row"><div class="price">$249</div><span class="chip">2TB</span></div>
+          <h3>Samsung 990 Pro</h3>
+          <p class="muted">PCIe 4.0 • Up to 7450 MB/s</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20Samsung%20990%20Pro%202TB">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/ram/600/400" alt="DDR5 RAM Kit">
+          <div class="price-row"><div class="price">$179</div><span class="chip">DDR5</span></div>
+          <h3>Corsair Vengeance 32GB</h3>
+          <p class="muted">2×16GB • 6000MHz • CL30</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20Corsair%20Vengeance%2032GB">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/motherboard/600/400" alt="Motherboard">
+          <div class="price-row"><div class="price">$289</div><span class="chip">Z790</span></div>
+          <h3>ASUS ROG Strix Z790‑F</h3>
+          <p class="muted">PCIe 5.0 • Wi‑Fi 6E • ATX</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20ROG%20Strix%20Z790-F">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/psu/600/400" alt="Power Supply">
+          <div class="price-row"><div class="price">$139</div><span class="chip">80+ Gold</span></div>
+          <h3>Seasonic Focus 850W</h3>
+          <p class="muted">Fully modular • Quiet fan</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20Seasonic%20Focus%20850W">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/case/600/400" alt="PC Case">
+          <div class="price-row"><div class="price">$159</div><span class="chip">ATX</span></div>
+          <h3>Lian Li Lancool III</h3>
+          <p class="muted">High‑airflow • Tool‑less design</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20Lian%20Li%20Lancool%20III">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/cooler/600/400" alt="CPU Cooler">
+          <div class="price-row"><div class="price">$99</div><span class="chip">AIO</span></div>
+          <h3>NZXT Kraken 240</h3>
+          <p class="muted">240mm • ARGB • Quiet pump</p>
+          <div class="row"><a class="btn" href="mailto:sales@z3t5u.online?subject=Order%20NZXT%20Kraken%20240">Buy Now</a><a class="btn secondary" href="#contact">Ask a Question</a></div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:support@z3t5u.online">support@z3t5u.online</a></p>
-    <p>Phone: +212-600-000-000</p>
+  <!-- WHY US -->
+  <section id="why" class="section">
+    <div class="container">
+      <h2>Why Choose Z3T5U</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>🏷️ Best Value</h3>
+          <p class="muted">We curate parts with the strongest price/performance and run weekly bundle deals for builders.</p>
+        </div>
+        <div class="feature">
+          <h3>🛡️ 2‑Year Warranty Options</h3>
+          <p class="muted">All products are genuine and eligible for extended coverage with easy replacement handling.</p>
+        </div>
+        <div class="feature">
+          <h3>⚙️ Build Assistance</h3>
+          <p class="muted">Need a full PC? We can spec and assemble a balanced system for gaming or content creation.</p>
+        </div>
+      </div>
+      <div style="margin-top:26px" class="cta">
+        <h3 style="margin:0 0 10px;font-size:22px">Ready to build your dream PC?</h3>
+        <p class="muted" style="margin:0 0 16px">Tell us your budget and use‑case — we'll send you a balanced parts list within 24 hours.</p>
+        <a class="btn" href="mailto:sales@z3t5u.online?subject=PC%20Build%20Quote&body=Budget:%20%0AUse-case%20(Gaming/Editing/Office):%20%0APreferences:%20">Get My Parts List</a>
+      </div>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Contact</h2>
+      <p class="muted">Questions about compatibility, shipping, or bulk orders? We’re here to help.</p>
+      <div class="grid">
+        <div class="card" style="grid-column:span 12">
+          <h3 style="margin:4px 0 10px">Reach us</h3>
+          <p>Email: <a href="mailto:support@z3t5u.online">support@z3t5u.online</a></p>
+          <p>Phone: +212-600-000-000</p>
+          <p>Business hours: Mon–Fri, 9:00–18:00</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
-    <p>&copy; 2025 Z3T5U Online | <a href="privacy.html">Privacy Policy</a></p>
+    <div class="container foot">
+      <div>© <span id="y"></span> Z3T5U Online • All rights reserved</div>
+      <div class="row"><a href="/privacy.html">Privacy Policy</a> · <a href="#">Terms</a></div>
+    </div>
   </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
+
+
